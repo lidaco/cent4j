@@ -20,26 +20,26 @@ Steps to build a Docker image:
 
 ####1. Clone this repo
 
-        git clone https://github.com/lidaco/centos4j.git
+        $git clone https://github.com/lidaco/centos4j.git
 
 ####2. Build the image
 
-        cd centos4j
-        docker build -t="centos4j" ./
+        $cd centos4j
+        $docker build -t="centos4j" ./
 
         This will take a few minutes.
 
-####3. Run the image's default command, which should start everything up.
+####3. Run the image's default command, which should start everything up
 The `-p` option forwards the container's port 80 to port 8083 on the host.
 (Note that the host will actually be a guest if you are using boot2docker, so you may need to re-forward the port in VirtualBox.)
 
-        docker run -p="8083:80" centos4j
+        $docker run -p="8083:80" centos4j
 
-####4. Access Webapp via [http://localhost:8083/](http://localhost:8083/) on your host machine.
+####4. Access Webapp via [http://localhost:8083/](http://localhost:8083/) on your host machine
 
         open http://localhost:8083/
 
-####You can also login to the image and have a look around:
+####You can also login to the image and have a look around with
 
-        docker run -it centos4j /bin/bash
+        $docker run -it centos4j /bin/bash
     
