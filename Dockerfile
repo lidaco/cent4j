@@ -24,8 +24,9 @@ ENV JAVA_BUILD b13
 
 RUN mkdir /app
 
-RUN yum update -y
-RUN yum install -y wget tar
+RUN yum update -y; \
+    yum install -y wget tar; \
+    yum clean -y all;
 
 # Install JDK
 RUN cd /tmp; \
