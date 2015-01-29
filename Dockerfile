@@ -18,7 +18,9 @@ ENV APP_NAME name
 ENV JAVA_VERSION 8u31
 ENV JAVA_BUILD b13
 
-RUN yum install -y update
+RUN mkdir /app
+
+RUN yum update -y
 RUN yum install -y wget tar
 
 # Install JDK
@@ -37,14 +39,20 @@ RUN wget -O /tmp/apache-tomcat-8.0.18.tar.gz http://mirrors.advancedhosters.com/
 RUN cd /usr/local && tar xzf /tmp/apache-tomcat-8.0.18.tar.gz
 RUN ln -s /usr/local/apache-tomcat-8.0.18.tar.gz /usr/local/tomcat
 RUN rm /tmp/apache-tomcat-8.0.18.tar.gz
+ENV CATALINA_HOME /usr/local/tomcat
+ADD ./docker/tomcat-conf $CATALINA_HOME/conf
+RUN rm -rf $CATALINA_HOME/webapps/*
 
 # Install Nginx
 ADD ./docker/nginx.repo /etc/yum/repos.d/nginx.repo
 RUN yum -y --noplugins --verbose install nginx
-ADD ./docker/nginx.conf /etc/nginx/conf.d
+ADD ./docker/nginx-conf /etc/nginx/conf.d
 RUN rm -f /etc/nginx/conf.d/default.conf
 
 # Install MongoDB
+
+# Install App
+ADD ./ /app
 
 # Forward HTTP ports
 EXPOSE 8083 8080

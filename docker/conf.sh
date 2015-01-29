@@ -1,3 +1,4 @@
+#!/bin/sh
 env APP_HOME /app
 env APP_NAME name
 
