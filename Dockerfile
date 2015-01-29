@@ -28,22 +28,29 @@ RUN yum update -y
 RUN yum install -y wget tar
 
 # Install JDK
-RUN cd /tmp \
- && curl -L -C - -b "oraclelicense=accept-securebackup-cookie" -O $JAVA_LINK \
- && rpm -Uvh jdk-*-linux-x64.rpm \
- && rm jdk-*-linux-x64.rpm
+RUN cd /tmp; \
+    curl -L -C - -b "oraclelicense=accept-securebackup-cookie" -O $JAVA_LINK; \
+    rpm -Uvh jdk-*-linux-x64.rpm; \
+    rm jdk-*-linux-x64.rpm
 ENV JAVA_HOME /usr/java/default
 
 # Install Maven
-RUN cd /tmp; wget -O maven.tar.gz $MAVEN_LINK
-RUN cd /opt; mkdir maven; tar xzf /tmp/maven.tar.gz --strip-components=1 -C maven; ln -s /opt/maven/bin/mvn /usr/local/bin; rm -rf /tmp/*
+RUN cd /tmp; \
+    wget -O maven.tar.gz $MAVEN_LINK; \
+    cd /opt; \
+    mkdir maven; \
+    tar xzf /tmp/maven.tar.gz --strip-components=1 -C maven; \
+    ln -s /opt/maven/bin/mvn /usr/local/bin; \
+    rm -rf /tmp/*
 ENV M2_HOME /opt/maven
 
 # Install Tomcat
-RUN wget -O /tmp/tomcat-8.tar.gz $TOMCAT_LINK
-RUN cd /usr/local; mkdir tomcat-8; tar xzf /tmp/tomcat-8.tar.gz --strip-components=1 -C tomcat-8
-RUN ln -s /usr/local/tomcat-8 /usr/local/tomcat
-RUN rm -rf /tmp/*
+RUN wget -O /tmp/tomcat-8.tar.gz $TOMCAT_LINK; \
+    cd /usr/local; \
+    mkdir tomcat-8; \
+    tar xzf /tmp/tomcat-8.tar.gz --strip-components=1 -C tomcat-8; \
+    ln -s /usr/local/tomcat-8 /usr/local/tomcat; \
+    rm -rf /tmp/*
 ENV CATALINA_HOME /usr/local/tomcat
 ADD ./docker/tomcat-conf $CATALINA_HOME/conf
 RUN rm -rf $CATALINA_HOME/webapps/*
