@@ -25,7 +25,7 @@ Steps to build a Docker image:
 ####2. Build the image
 
         $cd cent4j
-        $docker build -t="cent4j" ./
+        $docker build -t="lidaco/cent4j" ./
 
         This will take a few minutes.
 
@@ -33,7 +33,8 @@ Steps to build a Docker image:
 The `-p` option forwards the container's port 80 to port 8083 on the host.
 (Note that the host will actually be a guest if you are using boot2docker, so you may need to re-forward the port in VirtualBox.)
 
-        $docker run -p="8083:80" cent4j /bin/startup.sh
+        $docker run -it -p="8083:80" lidaco/cent4j /bin/bash
+        $/bin/startup.sh
 
 ####4. Access Webapp via [http://localhost:8083/](http://localhost:8083/) on your host machine
 
@@ -41,5 +42,5 @@ The `-p` option forwards the container's port 80 to port 8083 on the host.
 
 ####You can also login to the image and have a look around with
 
-        $docker run -it cent4j /bin/bash
+        $docker run -it lidaco/cent4j /bin/bash
     
