@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Stop Tomcat
 $CATALINA_HOME/bin/shutdown.sh

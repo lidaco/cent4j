@@ -65,6 +65,9 @@ ADD ./docker/nginx-conf /etc/nginx/conf.d
 
 # Install MongoDB
 
+# Install Start Script
+ADD ./docker/start.sh /bin/
+RUN chmod +x /bin/start.sh;
 
 # Install App
 ADD ./ /app
