@@ -1,4 +1,4 @@
-#Centos4J Dockerfile
+#Cent4J Dockerfile
 
 An example Dockerfile for a Java webapp based on Centos
 ----
@@ -33,7 +33,7 @@ Steps to build a Docker image:
 The `-p` option forwards the container's port 80 to port 8083 on the host.
 (Note that the host will actually be a guest if you are using boot2docker, so you may need to re-forward the port in VirtualBox.)
 
-        $docker run -p="8083:80" cent4j
+        $docker run -p="8083:80" cent4j /bin/startup.sh
 
 ####4. Access Webapp via [http://localhost:8083/](http://localhost:8083/) on your host machine
 

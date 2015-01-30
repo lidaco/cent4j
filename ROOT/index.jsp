@@ -5,6 +5,6 @@
     <title>Cent4j</title>
 </head>
 <body>
-<h1>Welcome to the HTML Page</h1>
+<h1>Welcome to the JSP Page</h1>
 </body>
 </html>

@@ -65,12 +65,19 @@ ADD ./docker/nginx-conf /etc/nginx/conf.d
 
 # Install MongoDB
 
+
 # Install Start Script
-ADD ./docker/start.sh /bin/
-RUN chmod +x /bin/start.sh;
+ADD ./docker/startup.sh /bin/
+RUN chmod +x /bin/startup.sh;
 
 # Install App
-ADD ./ /app
+ADD ./ /tmp/src
+RUN cd /tmp/src; \
+    mvn -Dmaven.test.skip=true package; \
+	rm -rf $APP_HOME/*; \
+	cp target/*.war $APP_HOME/ROOT.war; \
+	cd /tmp; \
+	rm -rf *;
 
 # Forward HTTP ports
 EXPOSE 80 8080
